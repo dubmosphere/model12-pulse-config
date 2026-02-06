@@ -32,6 +32,22 @@ cp "$SCRIPT_DIR/91-tascam-model12-pulseaudio.rules" "$UDEV_DIR/91-tascam-model12
 chmod 644 "$UDEV_DIR/91-tascam-model12-pulseaudio.rules"
 echo "  -> $UDEV_DIR/91-tascam-model12-pulseaudio.rules"
 
+# Resolve the real user's home directory (works even under sudo)
+REAL_USER="${SUDO_USER:-$USER}"
+REAL_HOME="$(getent passwd "$REAL_USER" | cut -d: -f6)"
+
+if [[ -z "$REAL_HOME" ]]; then
+    echo "Error: Could not determine home directory for user $REAL_USER"
+    exit 1
+fi
+
+# Install qjackctl folder
+echo "Installing qjackctl folder for user $REAL_USER..."
+cp -a "$SCRIPT_DIR/qjackctl" "$REAL_HOME"
+chmod +x "$REAL_HOME/qjackctl/scripts/"*.sh
+chown -R "$REAL_USER":"$REAL_USER" "$REAL_HOME/qjackctl"
+echo "  -> $REAL_HOME/qjackctl/"
+
 # Reload udev rules
 echo "Reloading udev rules..."
 udevadm control --reload-rules
