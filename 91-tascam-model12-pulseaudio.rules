@@ -1,0 +1,12 @@
+# TASCAM Model 12 - PulseAudio profile set assignment
+# Install to: /etc/udev/rules.d/91-tascam-model12-pulseaudio.rules
+#
+# Vendor: 0644 (TEAC Corp.)  Product: 805f (Model 12)
+
+SUBSYSTEM!="sound", GOTO="tascam_model12_end"
+ACTION!="change", GOTO="tascam_model12_end"
+KERNEL!="card*", GOTO="tascam_model12_end"
+
+ATTRS{idVendor}=="0644", ATTRS{idProduct}=="805f", ENV{PULSE_PROFILE_SET}="tascam-model12.conf"
+
+LABEL="tascam_model12_end"
