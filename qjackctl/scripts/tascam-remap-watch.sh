@@ -41,6 +41,8 @@ ensure_remap() {
     master_channel_map=mono \
     remix=no \
     >/dev/null 2>&1 || true
+
+  set_default_source
 }
 
 wait_for_pulse || exit 0
@@ -52,7 +54,6 @@ pactl subscribe | while read -r line; do
   case "$line" in
     *"Event 'new' on source"*|*"Event 'change' on source"*|*"Event 'new' on card"*|*"Event 'change' on card"*)
       ensure_remap
-      set_default_source
       ;;
   esac
 done
