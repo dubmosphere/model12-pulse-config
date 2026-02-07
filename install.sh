@@ -25,6 +25,11 @@ cp "$SCRIPT_DIR/tascam-model12.conf" "$PROFILE_DIR/tascam-model12.conf"
 chmod 644 "$PROFILE_DIR/tascam-model12.conf"
 echo "  -> $PROFILE_DIR/tascam-model12.conf"
 
+echo "Installing simple profile set..."
+cp "$SCRIPT_DIR/tascam-model12-simple.conf" "$PROFILE_DIR/tascam-model12-simple.conf"
+chmod 644 "$PROFILE_DIR/tascam-model12-simple.conf"
+echo "  -> $PROFILE_DIR/tascam-model12-simple.conf"
+
 # Install udev rule
 UDEV_DIR="/etc/udev/rules.d"
 echo "Installing udev rule..."
