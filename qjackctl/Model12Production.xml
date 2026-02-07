@@ -1,41 +1,41 @@
 <!DOCTYPE patchbay>
-<patchbay name="Model12Production" version="0.9.6">
+<patchbay version="0.9.6" name="Model12Production">
  <output-sockets>
-  <socket client="Bitwig\ Studio" type="jack-audio" name="Bitwig Output" exclusive="off">
+  <socket exclusive="off" client="Bitwig\ Studio" name="Bitwig Output" type="jack-audio">
    <plug>out1</plug>
    <plug>out2</plug>
   </socket>
-  <socket client="PulseAudio\ JACK\ Sink" type="jack-audio" name="PulseAudio JACK Sink" exclusive="off">
+  <socket exclusive="off" client="PulseAudio\ JACK\ Sink" name="PulseAudio JACK Sink" type="jack-audio">
    <plug>front\-left</plug>
    <plug>front\-right</plug>
   </socket>
-  <socket client="system" type="jack-audio" name="system 1" exclusive="off">
+  <socket exclusive="off" client="system" name="System In" type="jack-audio">
    <plug>capture_2</plug>
   </socket>
  </output-sockets>
  <input-sockets>
-  <socket client="Bitwig\ Studio" type="jack-audio" name="Bitwig Feedback" exclusive="off">
+  <socket exclusive="off" client="Bitwig\ Studio" name="Bitwig Feedback" type="jack-audio">
    <plug>in_loopback_l</plug>
    <plug>in_loopback_r</plug>
   </socket>
-  <socket client="system" type="jack-audio" name="System Out" exclusive="off">
+  <socket exclusive="off" client="system" name="System Out" type="jack-audio">
    <plug>playback_1</plug>
    <plug>playback_2</plug>
   </socket>
-  <socket client="Bitwig\ Studio" type="jack-audio" name="Bitwig PulseAudio" exclusive="off">
+  <socket exclusive="off" client="Bitwig\ Studio" name="Bitwig PulseAudio" type="jack-audio">
    <plug>in_pulseaudio_l</plug>
    <plug>in_pulseaudio_r</plug>
   </socket>
-  <socket client="PulseAudio\ JACK\ Source" type="jack-audio" name="PulseAudio\ JACK\ Source 1" exclusive="off">
+  <socket exclusive="off" client="PulseAudio\ JACK\ Source" name="PulseAudio JACK Source" type="jack-audio">
    <plug>mono</plug>
   </socket>
  </input-sockets>
  <slots/>
  <cables>
-  <cable output="system 1" input="PulseAudio\ JACK\ Source 1" type="jack-audio"/>
-  <cable output="Bitwig Output" input="Bitwig Feedback" type="jack-audio"/>
-  <cable output="PulseAudio JACK Sink" input="System Out" type="jack-audio"/>
-  <cable output="PulseAudio JACK Sink" input="Bitwig PulseAudio" type="jack-audio"/>
+  <cable type="jack-audio" input="Bitwig Feedback" output="Bitwig Output"/>
+  <cable type="jack-audio" input="System Out" output="PulseAudio JACK Sink"/>
+  <cable type="jack-audio" input="Bitwig PulseAudio" output="PulseAudio JACK Sink"/>
+  <cable type="jack-audio" input="PulseAudio JACK Source" output="System In"/>
  </cables>
 </patchbay>
 
