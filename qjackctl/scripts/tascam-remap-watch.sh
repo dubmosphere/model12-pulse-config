@@ -18,6 +18,12 @@ source_exists() {
   pactl list sources short | awk '{print $2}' | grep -Fxq "$1"
 }
 
+set_default_source() {
+  if source_exists "$REMAP_SOURCE"; then
+    pactl set-default-source "$REMAP_SOURCE" >/dev/null 2>&1 || true
+  fi
+}
+
 ensure_remap() {
   if source_exists "$REMAP_SOURCE"; then
     return 0
@@ -38,12 +44,15 @@ ensure_remap() {
 }
 
 wait_for_pulse || exit 0
+sleep 2
 ensure_remap
+set_default_source
 
 pactl subscribe | while read -r line; do
   case "$line" in
     *"Event 'new' on source"*|*"Event 'change' on source"*|*"Event 'new' on card"*|*"Event 'change' on card"*)
       ensure_remap
+      set_default_source
       ;;
   esac
 done
