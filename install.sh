@@ -53,6 +53,14 @@ chmod +x "$REAL_HOME/qjackctl/scripts/"*.sh
 chown -R "$REAL_USER":"$REAL_USER" "$REAL_HOME/qjackctl"
 echo "  -> $REAL_HOME/qjackctl/"
 
+# Install systemd user unit for remap source
+SYSTEMD_USER_DIR="$REAL_HOME/.config/systemd/user"
+echo "Installing systemd user unit for remap source..."
+mkdir -p "$SYSTEMD_USER_DIR"
+cp "$SCRIPT_DIR/systemd/tascam-remap.service" "$SYSTEMD_USER_DIR/tascam-remap.service"
+chown "$REAL_USER":"$REAL_USER" "$SYSTEMD_USER_DIR/tascam-remap.service"
+echo "  -> $SYSTEMD_USER_DIR/tascam-remap.service"
+
 # Reload udev rules
 echo "Reloading udev rules..."
 udevadm control --reload-rules
