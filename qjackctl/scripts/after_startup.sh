@@ -1,3 +1,5 @@
+#!/bin/bash
+
 echo -n "pactl load-module module-jack-sink connect=no channels=2"
 pactl load-module module-jack-sink connect=no channels=2
 

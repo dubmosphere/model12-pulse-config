@@ -1,3 +1,5 @@
+#!/bin/bash
+
 #echo -n "killall a2jmidid"
 #killall a2jmidid
 
