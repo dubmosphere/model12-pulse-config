@@ -48,7 +48,6 @@ ensure_remap() {
 wait_for_pulse || exit 0
 sleep 2
 ensure_remap
-set_default_source
 
 pactl subscribe | while read -r line; do
   case "$line" in
