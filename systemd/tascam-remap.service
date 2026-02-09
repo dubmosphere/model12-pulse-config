@@ -3,7 +3,7 @@ Description=Remap TASCAM Model 12 Ch2 to mono source
 
 [Service]
 Type=simple
-ExecStart=%h/qjackctl/scripts/tascam-remap-watch.sh
+ExecStart=%h/pulse/scripts/tascam-remap-watch.sh
 Restart=on-failure
 RestartSec=2
 

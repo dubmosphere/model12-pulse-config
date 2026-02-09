@@ -20,10 +20,10 @@ if [[ ! -d "$PROFILE_DIR" ]]; then
     exit 1
 fi
 
-echo "Installing profile set..."
-cp "$SCRIPT_DIR/tascam-model12.conf" "$PROFILE_DIR/tascam-model12.conf"
-chmod 644 "$PROFILE_DIR/tascam-model12.conf"
-echo "  -> $PROFILE_DIR/tascam-model12.conf"
+# echo "Installing profile set..."
+# cp "$SCRIPT_DIR/tascam-model12.conf" "$PROFILE_DIR/tascam-model12.conf"
+# chmod 644 "$PROFILE_DIR/tascam-model12.conf"
+# echo "  -> $PROFILE_DIR/tascam-model12.conf"
 
 echo "Installing simple profile set..."
 cp "$SCRIPT_DIR/tascam-model12-simple.conf" "$PROFILE_DIR/tascam-model12-simple.conf"
