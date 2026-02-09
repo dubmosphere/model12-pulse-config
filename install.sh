@@ -53,6 +53,12 @@ chmod +x "$REAL_HOME/qjackctl/scripts/"*.sh
 chown -R "$REAL_USER":"$REAL_USER" "$REAL_HOME/qjackctl"
 echo "  -> $REAL_HOME/qjackctl/"
 
+echo "Installing pulse folder for user $REAL_USER..."
+cp -a "$SCRIPT_DIR/pulse" "$REAL_HOME"
+chmod +x "$REAL_HOME/pulse/scripts/"*.sh
+chown -R "$REAL_USER":"$REAL_USER" "$REAL_HOME/pulse"
+echo "  -> $REAL_HOME/pulse/"
+
 # Install systemd user unit for remap source
 SYSTEMD_USER_DIR="$REAL_HOME/.config/systemd/user"
 echo "Installing systemd user unit for remap source..."
