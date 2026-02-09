@@ -75,7 +75,7 @@ udevadm trigger
 echo ""
 echo "=== Installation complete ==="
 echo ""
-echo "To apply changes, either, just reboot."
+echo "To apply changes, just reboot."
 echo ""
 # echo "Available profiles:"
 # echo "  - Stereo Out 1/2 + Stereo In 1/2     (default, priority 100)"
