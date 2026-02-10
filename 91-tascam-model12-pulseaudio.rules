@@ -7,6 +7,6 @@ SUBSYSTEM!="sound", GOTO="tascam_model12_end"
 ACTION!="change", GOTO="tascam_model12_end"
 KERNEL!="card*", GOTO="tascam_model12_end"
 
-ATTRS{idVendor}=="0644", ATTRS{idProduct}=="805f", ENV{PULSE_PROFILE_SET}="tascam-model12-simple.conf"
+ATTRS{idVendor}=="0644", ATTRS{idProduct}=="805f", ENV{PULSE_PROFILE_SET}="tascam-model12.conf"
 
 LABEL="tascam_model12_end"
