@@ -1,5 +1,5 @@
 [Unit]
-Description=Remap TASCAM Model 12 Ch2 to mono source
+Description=Create TASCAM Model 12 per-channel virtual sources
 
 [Service]
 Type=simple
