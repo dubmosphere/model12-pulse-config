@@ -15,18 +15,18 @@ MASTER="alsa_input.usb-TASCAM_Model_12_no_serial_number-00.analog-multichannel-i
 
 # label:pa_channel_in_master:source_name:description
 MONO_CHANNELS=(
-  "Ch1:front-left:tascam_ch1_mono:TASCAM-Ch1-Mono"
-  "Ch2:front-right:tascam_ch2_mono:TASCAM-Ch2-Mono"
-  "Ch3:rear-left:tascam_ch3_mono:TASCAM-Ch3-Mono"
-  "Ch4:rear-right:tascam_ch4_mono:TASCAM-Ch4-Mono"
-  "Ch5:front-center:tascam_ch5_mono:TASCAM-Ch5-Mono"
-  "Ch6:lfe:tascam_ch6_mono:TASCAM-Ch6-Mono"
+  "Ch1:front-left:model12_ch1_mono:Model12-Ch1-Mono"
+  "Ch2:front-right:model12_ch2_mono:Model12-Ch2-Mono"
+  "Ch3:rear-left:model12_ch3_mono:Model12-Ch3-Mono"
+  "Ch4:rear-right:model12_ch4_mono:Model12-Ch4-Mono"
+  "Ch5:front-center:model12_ch5_mono:Model12-Ch5-Mono"
+  "Ch6:lfe:model12_ch6_mono:Model12-Ch6-Mono"
 )
 
 STEREO_CHANNELS=(
-  "Ch7/8:side-left,side-right:tascam_ch78_stereo:TASCAM-Ch7/8-Stereo"
-  "Ch9/10:aux0,aux1:tascam_ch910_stereo:TASCAM-Ch9/10-Stereo"
-  "MainLR:aux2,aux3:tascam_main_stereo:TASCAM-Main-L/R"
+  "Ch7/8:side-left,side-right:model12_ch78_stereo:Model12-Ch7/8-Stereo"
+  "Ch9/10:aux0,aux1:model12_ch910_stereo:Model12-Ch9/10-Stereo"
+  "MainLR:aux2,aux3:model12_main_stereo:Model12-Main-L/R"
 )
 
 wait_for_pulse() {
@@ -44,8 +44,8 @@ source_exists() {
 }
 
 set_default_source() {
-  if source_exists "tascam_ch2_mono"; then
-    pactl set-default-source "tascam_ch2_mono" >/dev/null 2>&1 || true
+  if source_exists "model12_ch2_mono"; then
+    pactl set-default-source "model12_ch2_mono" >/dev/null 2>&1 || true
   fi
 }
 
@@ -53,6 +53,8 @@ ensure_remaps() {
   if ! source_exists "$MASTER"; then
     return 0
   fi
+
+  local created=0
 
   for entry in "${MONO_CHANNELS[@]}"; do
     IFS=: read -r label master_ch source_name desc <<< "$entry"
@@ -66,6 +68,7 @@ ensure_remaps() {
         master_channel_map="$master_ch" \
         remix=no \
         >/dev/null 2>&1 || true
+      created=1
     fi
   done
 
@@ -81,10 +84,13 @@ ensure_remaps() {
         master_channel_map="$master_ch" \
         remix=no \
         >/dev/null 2>&1 || true
+      created=1
     fi
   done
 
-  set_default_source
+  if [[ "$created" -eq 1 ]]; then
+    set_default_source
+  fi
 }
 
 wait_for_pulse || exit 0

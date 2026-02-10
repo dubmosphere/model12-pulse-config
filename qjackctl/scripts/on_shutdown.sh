@@ -15,35 +15,35 @@ pacmd suspend-sink alsa_output.usb-TASCAM_Model_12_no_serial_number-00.analog-st
 echo -n "pacmd suspend-source alsa_input.usb-TASCAM_Model_12_no_serial_number-00.analog-multichannel-input 0"
 pacmd suspend-source alsa_input.usb-TASCAM_Model_12_no_serial_number-00.analog-multichannel-input 0
 
-echo -n "pacmd suspend-source tascam_ch1_mono 0"
-pacmd suspend-source tascam_ch1_mono 0
+echo -n "pacmd suspend-source model12_ch1_mono 0"
+pacmd suspend-source model12_ch1_mono 0
 
-echo -n "pacmd suspend-source tascam_ch2_mono 0"
-pacmd suspend-source tascam_ch2_mono 0
+echo -n "pacmd suspend-source model12_ch2_mono 0"
+pacmd suspend-source model12_ch2_mono 0
 
-echo -n "pacmd suspend-source tascam_ch3_mono 0"
-pacmd suspend-source tascam_ch3_mono 0
+echo -n "pacmd suspend-source model12_ch3_mono 0"
+pacmd suspend-source model12_ch3_mono 0
 
-echo -n "pacmd suspend-source tascam_ch4_mono 0"
-pacmd suspend-source tascam_ch4_mono 0
+echo -n "pacmd suspend-source model12_ch4_mono 0"
+pacmd suspend-source model12_ch4_mono 0
 
-echo -n "pacmd suspend-source tascam_ch5_mono 0"
-pacmd suspend-source tascam_ch5_mono 0
+echo -n "pacmd suspend-source model12_ch5_mono 0"
+pacmd suspend-source model12_ch5_mono 0
 
-echo -n "pacmd suspend-source tascam_ch6_mono 0"
-pacmd suspend-source tascam_ch6_mono 0
+echo -n "pacmd suspend-source model12_ch6_mono 0"
+pacmd suspend-source model12_ch6_mono 0
 
-echo -n "pacmd suspend-source tascam_ch78_stereo 0"
-pacmd suspend-source tascam_ch78_stereo 0
+echo -n "pacmd suspend-source model12_ch78_stereo 0"
+pacmd suspend-source model12_ch78_stereo 0
 
-echo -n "pacmd suspend-source tascam_ch910_stereo 0"
-pacmd suspend-source tascam_ch910_stereo 0
+echo -n "pacmd suspend-source model12_ch910_stereo 0"
+pacmd suspend-source model12_ch910_stereo 0
 
-echo -n "pacmd suspend-source tascam_main_stereo 0"
-pacmd suspend-source tascam_main_stereo 0
+echo -n "pacmd suspend-source model12_main_stereo 0"
+pacmd suspend-source model12_main_stereo 0
 
 echo -n "pacmd set-default-sink alsa_output.usb-TASCAM_Model_12_no_serial_number-00.analog-stereo-output-12"
 pacmd set-default-sink alsa_output.usb-TASCAM_Model_12_no_serial_number-00.analog-stereo-output-12
 
-echo -n "pacmd set-default-source tascam_ch2_mono"
-pacmd set-default-source tascam_ch2_mono
+echo -n "pacmd set-default-source model12_ch2_mono"
+pacmd set-default-source model12_ch2_mono
