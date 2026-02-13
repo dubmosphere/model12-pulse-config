@@ -12,6 +12,9 @@ pactl unload-module module-jack-sink
 echo -n "pacmd suspend-sink alsa_output.usb-TASCAM_Model_12_no_serial_number-00.analog-stereo-output-12 0"
 pacmd suspend-sink alsa_output.usb-TASCAM_Model_12_no_serial_number-00.analog-stereo-output-12 0
 
+echo -n "pacmd suspend-sink model12_stereo_out 0"
+pacmd suspend-sink model12_stereo_out 0
+
 echo -n "pacmd suspend-source alsa_input.usb-TASCAM_Model_12_no_serial_number-00.analog-multichannel-input 0"
 pacmd suspend-source alsa_input.usb-TASCAM_Model_12_no_serial_number-00.analog-multichannel-input 0
 
@@ -42,8 +45,8 @@ pacmd suspend-source model12_ch910_stereo 0
 echo -n "pacmd suspend-source model12_main_stereo 0"
 pacmd suspend-source model12_main_stereo 0
 
-echo -n "pacmd set-default-sink alsa_output.usb-TASCAM_Model_12_no_serial_number-00.analog-stereo-output-12"
-pacmd set-default-sink alsa_output.usb-TASCAM_Model_12_no_serial_number-00.analog-stereo-output-12
+echo -n "pacmd set-default-sink model12_stereo_out"
+pacmd set-default-sink model12_stereo_out
 
 echo -n "pacmd set-default-source model12_ch2_mono"
 pacmd set-default-source model12_ch2_mono

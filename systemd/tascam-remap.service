@@ -1,5 +1,5 @@
 [Unit]
-Description=Create TASCAM Model 12 per-channel virtual sources
+Description=Create TASCAM Model 12 virtual sources and stereo sink
 
 [Service]
 Type=simple

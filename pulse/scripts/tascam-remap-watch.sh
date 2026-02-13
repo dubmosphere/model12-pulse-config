@@ -1,10 +1,12 @@
 #!/bin/bash
 set -euo pipefail
 
-# TASCAM Model 12 — virtual source creator
+# TASCAM Model 12 — virtual source & sink creator
 #
-# Watches for the multichannel ALSA source to appear, then creates
-# per-channel virtual sources using module-remap-source (remix=no).
+# Watches for the multichannel ALSA source/sink to appear, then creates:
+#   - Per-channel virtual sources using module-remap-source (remix=no)
+#   - A virtual stereo sink using module-remap-sink so games/apps detect
+#     a standard stereo output (maps to USB Return 1/2)
 #
 # ALSA channel order (12ch capture):
 #   Ch1=front-left  Ch2=front-right  Ch3=rear-left     Ch4=rear-right
@@ -12,6 +14,8 @@ set -euo pipefail
 #   Ch9=aux0        Ch10=aux1        Ch11(MainL)=aux2  Ch12(MainR)=aux3
 
 MASTER="alsa_input.usb-TASCAM_Model_12_no_serial_number-00.analog-multichannel-input"
+MASTER_SINK="alsa_output.usb-TASCAM_Model_12_no_serial_number-00.analog-stereo-output-12"
+VIRTUAL_SINK_NAME="model12_stereo_out"
 
 # label:pa_channel_in_master:source_name:description
 MONO_CHANNELS=(
@@ -43,9 +47,19 @@ source_exists() {
   pactl list sources short | awk '{print $2}' | grep -Fxq "$1"
 }
 
+sink_exists() {
+  pactl list sinks short | awk '{print $2}' | grep -Fxq "$1"
+}
+
 set_default_source() {
   if source_exists "model12_ch2_mono"; then
     pactl set-default-source "model12_ch2_mono" >/dev/null 2>&1 || true
+  fi
+}
+
+set_default_sink() {
+  if sink_exists "$VIRTUAL_SINK_NAME"; then
+    pactl set-default-sink "$VIRTUAL_SINK_NAME" >/dev/null 2>&1 || true
   fi
 }
 
@@ -88,8 +102,23 @@ ensure_remaps() {
     fi
   done
 
+  # Create virtual stereo sink (for games/apps that need a standard stereo output)
+  if sink_exists "$MASTER_SINK" && ! sink_exists "$VIRTUAL_SINK_NAME"; then
+    pactl load-module module-remap-sink \
+      master="$MASTER_SINK" \
+      sink_name="$VIRTUAL_SINK_NAME" \
+      sink_properties=device.description="Model12-Stereo-Output" \
+      channels=2 \
+      channel_map=left,right \
+      master_channel_map=left,right \
+      remix=no \
+      >/dev/null 2>&1 || true
+    created=1
+  fi
+
   if [[ "$created" -eq 1 ]]; then
     set_default_source
+    set_default_sink
   fi
 }
 
@@ -99,7 +128,7 @@ ensure_remaps
 
 pactl subscribe | while read -r line; do
   case "$line" in
-    *"Event 'new' on source"*|*"Event 'new' on card"*)
+    *"Event 'new' on source"*|*"Event 'new' on sink"*|*"Event 'new' on card"*)
       ensure_remaps
       ;;
   esac
