@@ -15,7 +15,9 @@ Linux PulseAudio/ALSA configuration for the TASCAM Model 12 USB audio interface.
   - `scripts/after_startup.sh` — Loads `module-jack-sink`/`module-jack-source` bridges and sets JACK as default.
   - `scripts/on_shutdown.sh` — Unloads JACK bridges and unsuspends PulseAudio sinks/sources.
   - `Model12Production.xml` — Patchbay preset routing Bitwig, PulseAudio, and system ports.
-- **install.sh** — Installer (requires `sudo`). Copies profile, udev rule, qjackctl folder, pulse folder, and systemd unit to their destinations.
+- **install.sh** — Legacy PulseAudio installer (requires `sudo`). Copies profile to `/usr/share/pulseaudio/alsa-mixer/profile-sets/` and installs udev rule using `PULSE_PROFILE_SET`. Use only if running standalone PulseAudio (not PipeWire).
+- **install-pipewire.sh** — PipeWire installer (requires `sudo`). Copies profile to `/usr/share/alsa-card-profile/mixer/profile-sets/`, installs WirePlumber Lua rule, qjackctl folder, pulse scripts, and systemd unit.
+- **wireplumber/main.lua.d/51-tascam-model12.lua** — WirePlumber rule that assigns the custom ACP profile set and default profile to the TASCAM device. Replaces the old udev `PULSE_PROFILE_SET` approach for PipeWire.
 - **enable_service.sh** — Enables the `tascam-remap.service` systemd user unit.
 - **check_service_status.sh** — Checks the status of the systemd service.
 

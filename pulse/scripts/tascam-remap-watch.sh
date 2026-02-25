@@ -109,8 +109,8 @@ ensure_remaps() {
       sink_name="$VIRTUAL_SINK_NAME" \
       sink_properties=device.description="Model12-Stereo-Output" \
       channels=2 \
-      channel_map=left,right \
-      master_channel_map=left,right \
+      channel_map=front-left,front-right \
+      master_channel_map=front-left,front-right \
       remix=no \
       >/dev/null 2>&1 || true
     created=1
