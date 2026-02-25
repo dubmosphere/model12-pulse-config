@@ -41,9 +41,12 @@ echo "  -> $ACP_PROFILE_DIR/tascam-model12.conf"
 WP_LUA_DIR="$REAL_HOME/.config/wireplumber/main.lua.d"
 echo "Installing WirePlumber device rule for user $REAL_USER..."
 mkdir -p "$WP_LUA_DIR"
+cp "$SCRIPT_DIR/wireplumber/main.lua.d/50-alsa-config.lua" "$WP_LUA_DIR/50-alsa-config.lua"
 cp "$SCRIPT_DIR/wireplumber/main.lua.d/51-tascam-model12.lua" "$WP_LUA_DIR/51-tascam-model12.lua"
+chmod 644 "$WP_LUA_DIR/50-alsa-config.lua"
 chmod 644 "$WP_LUA_DIR/51-tascam-model12.lua"
 chown -R "$REAL_USER":"$REAL_USER" "$REAL_HOME/.config/wireplumber"
+echo "  -> $WP_LUA_DIR/50-alsa-config.lua"
 echo "  -> $WP_LUA_DIR/51-tascam-model12.lua"
 
 # Install qjackctl folder
