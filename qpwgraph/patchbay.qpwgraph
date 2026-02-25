@@ -1,5 +1,10 @@
 <!DOCTYPE patchbay>
 <patchbay name="patchbay" version="0.9.9">
- <items/>
+ <items>
+  <item node-type="pipewire" port-type="pipewire-audio">
+   <output node="Model12-Stereo-Output" port="Model12-Stereo-Output:output_FL"/>
+   <input node="Model 12 USB Return 1/2 (Stereo)" port="Model 12:playback_FL"/>
+  </item>
+ </items>
 </patchbay>
 
