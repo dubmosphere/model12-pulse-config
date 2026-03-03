@@ -2,6 +2,26 @@
 <patchbay name="patchbay" version="0.9.9">
  <items>
   <item node-type="pipewire" port-type="pipewire-audio">
+   <output node="Bitwig Studio" port="out8"/>
+   <input node="Bitwig Studio" port="Loopback R"/>
+  </item>
+  <item node-type="pipewire" port-type="pipewire-audio">
+   <output node="Model12-Stereo-Output" port="Model12-Stereo-Output:output_FR"/>
+   <input node="Bitwig Studio" port="PulseAudio R"/>
+  </item>
+  <item node-type="pipewire" port-type="pipewire-audio">
+   <output node="Bitwig Studio" port="out7"/>
+   <input node="Bitwig Studio" port="Loopback L"/>
+  </item>
+  <item node-type="alsa" port-type="alsa-midi">
+   <output node="28:MPKmini2" port="0:MPKmini2 MIDI 1"/>
+   <input node="20:Model 12" port="0:Model 12 MIDI OUT"/>
+  </item>
+  <item node-type="pipewire" port-type="pipewire-audio">
+   <output node="Model12-Stereo-Output" port="Model12-Stereo-Output:output_FL"/>
+   <input node="Bitwig Studio" port="PulseAudio L"/>
+  </item>
+  <item node-type="pipewire" port-type="pipewire-audio">
    <output node="Model12-Stereo-Output" port="Model12-Stereo-Output:output_FL"/>
    <input node="Model 12 USB Return 1/2 (Stereo)" port="Model 12:playback_FL"/>
   </item>
